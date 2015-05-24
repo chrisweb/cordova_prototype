@@ -8,7 +8,7 @@ desktop.ini
 .DS_Store
 
 # netbeans meta data
-nbproject
+nbproject/private
 
 # sass cache directory
 .sass-cache
