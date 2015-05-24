@@ -8,7 +8,7 @@ desktop.ini
 .DS_Store
 
 # netbeans meta data
-nbproject/private
+app/nbproject/private
 
 # sass cache directory
 .sass-cache
@@ -36,3 +36,7 @@ app/platforms
 
 # cordova plugins
 app/plugins
+
+# css build
+app/www/stylesheets/main.css
+app/www/stylesheets/main.css.map
