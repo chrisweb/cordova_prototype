@@ -22,9 +22,11 @@ require([
 ], function ($, utilities) {
 
     // enable html debugging
-    utilities.logSpecial = true;
+    utilities.logSpecial = false;
 
     var app = {
+        // cordova filesystem
+        filesystem: null,
         // Application Constructor
         initialize: function() {
             
@@ -71,17 +73,36 @@ require([
                 utilities.log(eventName, 'fontColor:green');
                 utilities.log(typeof navigator.camera);
                 
+                // tried to log orientation by editing the config.xml but it did
+                // not work, so now I use the plugin
+                screen.lockOrientation('portrait');
+                
+                // when building with netbeans there is a problem with
+                // the camera plugin, sometimes it does not get installed
+                // which results in the camera object to be undefined
+                // !build using the command line and everything is fine
+                if (typeof navigator.camera === 'undefined') {
+                    
+                    window.alert('application error camera is undefined');
+                    
+                }
+                
+                // retrieve an instance of the filesystem
+                window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, this.filesystemSuccess.bind(this), this.filesystemError);
+                
                 var $body = $('body');
                 var $appHeader = $body.find('#appHeader');
                 var $appFooter = $body.find('#appFooter');
                 var $appCore = $body.find('#appCore');
-                var $canvasArea = $appCore.find('#canvasArea');
-                var context = $canvasArea[0].getContext('2d');
+                var $visibleCanvasArea = $appCore.find('#visibleCanvasArea');
+                var context = $visibleCanvasArea[0].getContext('2d');
+                var $backupCanvasArea = $appCore.find('#backupCanvasArea');
+                var backupContext = $backupCanvasArea[0].getContext('2d');
                 var appWidth = $body.innerWidth();
                 var appHeight = $body.innerHeight();
                 
                 // add the takePicture button now the device is ready
-                $appFooter.append('<button class="takePicture">take photo</button>');
+                $appFooter.append('<button type="button" class="takePicture btn btn-default btn-lg"><span class="glyphicon glyphicon-camera" aria-hidden="true"></span></button>');
                 
                 var headerHeight = $appHeader.outerHeight(true);
                 var footerHeight = $appFooter.outerHeight(true);
@@ -93,6 +114,9 @@ require([
                 // keep some space on the bottom for the buttons
                 context.canvas.width = canvasWidth;
                 context.canvas.height = canvasHeight;
+                
+                backupContext.canvas.width = canvasWidth;
+                backupContext.canvas.height = canvasHeight;
                 
                 // on take picture click
                 $body.on('click', '.takePicture', function() {
@@ -134,8 +158,14 @@ require([
                                 // draw the image onto the canvas
                                 context.drawImage(image, 0, 0, image.width * ratio, image.height * ratio);
                                 
-                                // add the filter button
-                                $appFooter.append('<button class="applyFilter">Use filter</button>');
+                                // draw the backup image onto the hidden canvas
+                                backupContext.drawImage(image, 0, 0, image.width * ratio, image.height * ratio);
+                                
+                                // add the "image manipulation" and "action" buttons
+                                $appFooter.append('<button type="button" class="applyFilter btn btn-default btn-lg"><span class="glyphicon glyphicon-tint" aria-hidden="true"></span></button>');
+                                $appFooter.append('<button type="button" class="addStickers btn btn-default btn-lg"><span class="glyphicon glyphicon-sunglasses" aria-hidden="true"></span></button>');
+                                $appFooter.append('<button type="button" class="saveImage btn btn-default btn-lg"><span class="glyphicon glyphicon-floppy-save" aria-hidden="true"></span></button>');
+                                $appFooter.append('<button type="button" class="undoChanges btn btn-default btn-lg"><span class="glyphicon glyphicon-erase" aria-hidden="true"></span></button>');
                                 
                             };
                             
@@ -151,7 +181,6 @@ require([
                 });
                 
                 var filterId = 1;
-                var imageDataBackup;
                 
                 $body.on('click', '.applyFilter', function() {
                     
@@ -159,14 +188,8 @@ require([
                     
                     var pixelsCount = canvasWidth * canvasHeight;
                     
-                    // first time backup the image data
-                    if (imageDataBackup === undefined) {
-                        
-                        imageDataBackup = context.getImageData(0, 0, canvasWidth, canvasHeight);
-                        
-                    }
-                    
-                    var imageData = imageDataBackup;
+                    // get the original "backupped" image data
+                    var imageData = backupContext.getImageData(0, 0, canvasWidth, canvasHeight);
 
                     // loop through all the pixels
                     for (var i = 0; i < pixelsCount * 4; i += 4) {
@@ -223,13 +246,115 @@ require([
                             
                     }
                     
+                    // put image onto canvas
+                    context.putImageData(imageData, 0, 0);
+                    
+                });
+                
+                $body.on('click', '.addStickers', function() {
+                    
+                    
+                    
+                });
+                
+                var that = this;
+                
+                $body.on('click', '.saveImage', function() {
+                    
+                    that.filesystem.root.getFile(
+                        'beautifyme_' + utilities.generateUUID() + '.png',
+                        {
+                            create: true,
+                            exclusive: false
+                        },
+                        that.createFileSuccess.bind(that),
+                        that.createFileError
+                    );
+                    
+                });
+                
+                $body.on('click', '.undoChanges', function() {
+                    
+                    // get the original "backupped" image data
+                    var imageData = backupContext.getImageData(0, 0, canvasWidth, canvasHeight);
+                    
+                    // put image onto canvas
                     context.putImageData(imageData, 0, 0);
                     
                 });
                 
             }
             
+        },
+        filesystemSuccess: function(filesystem) {
+            
+            this.filesystem = filesystem;
+            
+        },
+        filesystemError: function(error) {
+            
+            window.alert('getting filesystem failed');
+            
+            utilities.log(error);
+            
+        },
+        createFileSuccess: function(filePointer) {
+            
+            filePointer.createWriter(this.fileWriterSuccess, this.fileWriterError);
+            
+        },
+        createFileError: function(error) {
+            
+            window.alert('creating file failed');
+            
+            utilities.log(error);
+            
+        },
+        fileWriterSuccess: function(writer) {
+            
+            var $body = $('body');
+            var $appCore = $body.find('#appCore');
+            var $visibleCanvasArea = $appCore.find('#visibleCanvasArea');
+            
+            var photoDataUrl = $visibleCanvasArea[0].toDataURL('image/png');
+            
+            var photoString = photoDataUrl.replace('data:image/png;base64,', '');
+            
+            // https://developer.mozilla.org/en-US/docs/Web/API/WindowBase64/atob
+            //var photoBlob = new Blob([window.atob(photoString)],  {type: 'image/png', encoding: 'utf-8'});
+            
+            // solution from http://stackoverflow.com/questions/16245767/creating-a-blob-from-a-base64-string-in-javascript/16245768#16245768
+            var sliceSize = 512;
+
+            var byteCharacters = atob(photoString);
+            var byteArrays = [];
+
+            for (var offset = 0; offset < byteCharacters.length; offset += sliceSize) {
+                var slice = byteCharacters.slice(offset, offset + sliceSize);
+
+                var byteNumbers = new Array(slice.length);
+                for (var i = 0; i < slice.length; i++) {
+                    byteNumbers[i] = slice.charCodeAt(i);
+                }
+
+                var byteArray = new Uint8Array(byteNumbers);
+
+                byteArrays.push(byteArray);
+            }
+
+            var photoBlob = new Blob(byteArrays, {type: 'image/png', encoding: 'utf-8'});
+            
+            writer.write(photoBlob);
+            
+        },
+        fileWriterError: function(error) {
+            
+            window.alert('creating writer failed');
+            
+            utilities.log(error);
+            
         }
+        
     };
     
     app.initialize();

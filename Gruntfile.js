@@ -118,6 +118,12 @@ module.exports = function(grunt) {
                 cwd: '<%= config.node_modules %>/chrisweb-utilities.js/',
                 src: 'utilities.js',
                 dest: '<%= config.www %>/scripts/vendor/chrisweb-utilities/'
+            },
+            bootstrapFonts: {
+                expand: true,
+                cwd: '<%= config.node_modules %>/bootstrap-sass/assets/fonts',
+                src: '**/*',
+                dest: '<%= config.www %>/fonts/'
             }
         },
         

@@ -5652,9 +5652,13 @@ html, body {
 
 #appHeader .tagline {
   margin: 0px;
-  padding: 0px; }
+  padding: 0px;
+  color: #b556b2; }
 
 #appCore #canvasArea {
   display: block; }
+
+#appFooter {
+  height: 46px; }
 
 /*# sourceMappingURL=main.css.map */

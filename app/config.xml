@@ -23,11 +23,15 @@
         <allow-intent href="itms:*"/>
         <allow-intent href="itms-apps:*"/>
     </platform>
-    <preference name="orientation" value="portait" />
+    <preference name="orientation" value="portait"/>
     <platform name="android">
-        <icon src="resources/android/ldpi.png" density="ldpi" />
-        <icon src="resources/android/mdpi.png" density="mdpi" />
-        <icon src="resources/android/hdpi.png" density="hdpi" />
-        <icon src="resources/android/xhdpi.png" density="xhdpi" />
+        <icon density="ldpi" src="resources/android/ldpi.png"/>
+        <icon density="mdpi" src="resources/android/mdpi.png"/>
+        <icon density="hdpi" src="resources/android/hdpi.png"/>
+        <icon density="xhdpi" src="resources/android/xhdpi.png"/>
     </platform>
+    <feature name="File">
+        <param name="android-package" value="org.apache.cordova.FileUtils" />
+    </feature>
+    <preference name="AndroidExtraFilesystems" value="documents" />
 </widget>
