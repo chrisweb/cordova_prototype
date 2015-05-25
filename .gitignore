@@ -40,3 +40,6 @@ app/plugins
 # css build
 app/www/stylesheets/main.css
 app/www/stylesheets/main.css.map
+
+# fonts
+app/www/fonts/bootstrap

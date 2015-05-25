@@ -1,29 +1,6 @@
 # cordova_prototype
 bautify me photo app (cordova prototype)
 
-distort
-add text
-add  over photo
-add filter
-add frame
-
-distort canvas
-manipulate
-
-effect
-canvas
-photo
-image
-filter
-lens
-share
-selfie
-Retouch
-transform
-face
-
-facetune app
-
 ## TODOS
 
 * DONE: setup package json to retrieve dependencies (requirejs, twitter bootstrap, grunt, ...)
@@ -39,10 +16,12 @@ facetune app
 * DONE: create a black and white filter
 * DONE: lock orientation to portrait in config.xml
 * DONE: add the splashscreen plugin
+* DONE: change the application icon
+* DONE: save image to phone photo library
+* share photo on social networks
 * create the images needed by the splashscreen plugin
-* save image to phone photo library
 * load image from library to edit it
-* change the application icon
+* add stickers to an image
 
 ## RESOURCES
 
@@ -129,3 +108,21 @@ on your device go to settings > apps and delete the app, then run the command ag
 
 to use the remote debugging of chrome
 open chrome, go to more tools > inspect devices and there your device should show up, now click on inspect
+
+## keywords
+
+* distort
+* manipulate
+* image
+* effect
+* canvas
+* photo
+* filter
+* lens
+* share
+* selfie
+* retouch
+* transform
+* face
+* fun
+* frame
