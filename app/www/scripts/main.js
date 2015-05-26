@@ -73,10 +73,6 @@ require([
                 utilities.log(eventName, 'fontColor:green');
                 utilities.log(typeof navigator.camera);
                 
-                // tried to log orientation by editing the config.xml but it did
-                // not work, so now I use the plugin
-                screen.lockOrientation('portrait');
-                
                 // when building with netbeans there is a problem with
                 // the camera plugin, sometimes it does not get installed
                 // which results in the camera object to be undefined
@@ -161,11 +157,16 @@ require([
                                 // draw the backup image onto the hidden canvas
                                 backupContext.drawImage(image, 0, 0, image.width * ratio, image.height * ratio);
                                 
-                                // add the "image manipulation" and "action" buttons
-                                $appFooter.append('<button type="button" class="applyFilter btn btn-default btn-lg"><span class="glyphicon glyphicon-tint" aria-hidden="true"></span></button>');
-                                $appFooter.append('<button type="button" class="addStickers btn btn-default btn-lg"><span class="glyphicon glyphicon-sunglasses" aria-hidden="true"></span></button>');
-                                $appFooter.append('<button type="button" class="saveImage btn btn-default btn-lg"><span class="glyphicon glyphicon-floppy-save" aria-hidden="true"></span></button>');
-                                $appFooter.append('<button type="button" class="undoChanges btn btn-default btn-lg"><span class="glyphicon glyphicon-erase" aria-hidden="true"></span></button>');
+                                // check if the buttons already got added
+                                if ($appFooter.find('.applyFilter').length === 0) {
+                                
+                                    // add the "image manipulation" and "action" buttons
+                                    $appFooter.append('<button type="button" class="applyFilter btn btn-default btn-lg"><span class="glyphicon glyphicon-tint" aria-hidden="true"></span></button>');
+                                    $appFooter.append('<button type="button" class="addStickers btn btn-default btn-lg"><span class="glyphicon glyphicon-sunglasses" aria-hidden="true"></span></button>');
+                                    $appFooter.append('<button type="button" class="saveImage btn btn-default btn-lg"><span class="glyphicon glyphicon-floppy-save" aria-hidden="true"></span></button>');
+                                    $appFooter.append('<button type="button" class="undoChanges btn btn-default btn-lg"><span class="glyphicon glyphicon-erase" aria-hidden="true"></span></button>');
+                                
+                                }
                                 
                             };
                             
@@ -274,6 +275,9 @@ require([
                 });
                 
                 $body.on('click', '.undoChanges', function() {
+                    
+                    // reset the filterId
+                    filterId = 1;
                     
                     // get the original "backupped" image data
                     var imageData = backupContext.getImageData(0, 0, canvasWidth, canvasHeight);

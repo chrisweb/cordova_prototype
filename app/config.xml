@@ -23,7 +23,7 @@
         <allow-intent href="itms:*"/>
         <allow-intent href="itms-apps:*"/>
     </platform>
-    <preference name="orientation" value="portait"/>
+    <preference name="orientation" value="portrait"/>
     <platform name="android">
         <icon density="ldpi" src="resources/android/ldpi.png"/>
         <icon density="mdpi" src="resources/android/mdpi.png"/>

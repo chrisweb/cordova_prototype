@@ -91,11 +91,21 @@ git config --global http.sslVerify false
 git config --global http.sslVerify true
 
 if on device ready the camera plugin is undefined, re-install the plugins
+cordova plugin remove cordova-plugin-camera
 cordova plugin add cordova-plugin-camera
+
+if the app does not build correctly try to reinstall the platform and plugins
+cordova platform remove android 
+cordova platform add android 
+
+cordova plugin remove cordova-plugin-splashscreen
+cordova plugin remove cordova-plugin-whitelist
+cordova plugin remove cordova-plugin-file
+cordova plugin remove cordova-plugin-camera
 cordova plugin add cordova-plugin-splashscreen
 cordova plugin add cordova-plugin-whitelist
-cordova plugin add cordova-plugin-screen-orientation
 cordova plugin add cordova-plugin-file
+cordova plugin add cordova-plugin-camera
 
 to test the app in the emulator use this command
 cordova emulate android
