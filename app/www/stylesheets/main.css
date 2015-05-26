@@ -5650,15 +5650,29 @@ html, body {
   height: 100%;
   overflow: hidden; }
 
-#appHeader .tagline {
-  margin: 0px;
-  padding: 0px;
-  color: #b556b2; }
+.alert {
+  position: absolute;
+  z-index: 99;
+  width: 100%; }
+
+#appHeader {
+  background: linear-gradient(to bottom, #a849a3 0%, #c85ec7 53%, #e570e7 100%);
+  height: 52px; }
+  #appHeader .tagline {
+    margin: 0px;
+    padding: 4px;
+    color: #fff; }
 
 #appCore #canvasArea {
   display: block; }
 
 #appFooter {
-  height: 46px; }
+  background: linear-gradient(to top, #a849a3 0%, #c85ec7 53%, #e570e7 100%);
+  height: 60px;
+  padding: 4px; }
+  #appFooter .btn {
+    outline: none; }
+  #appFooter .btn:not(:first-child) margin {
+    right: 4px; }
 
 /*# sourceMappingURL=main.css.map */

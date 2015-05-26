@@ -18,10 +18,11 @@ bautify me photo app (cordova prototype)
 * DONE: add the splashscreen plugin
 * DONE: change the application icon
 * DONE: save image to phone photo library
+* DONE: add stickers to an image
+* DONE: show message (green / red) after each action
+* DONE: create the images needed by the splashscreen plugin
 * share photo on social networks
-* create the images needed by the splashscreen plugin
 * load image from library to edit it
-* add stickers to an image
 
 ## RESOURCES
 

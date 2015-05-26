@@ -11,12 +11,21 @@ html, body {
     overflow: hidden;
 }
 
+.alert {
+    position: absolute;
+    z-index: 99;
+    width: 100%;
+}
+
 #appHeader {
+    
+    background: linear-gradient(to bottom, #a849a3 0%,#c85ec7 53%,#e570e7 100%);
+    height: 52px;
     
     .tagline {
         margin: 0px;
-        padding: 0px;
-        color: #b556b2;
+        padding: 4px;
+        color: #fff;
     }
     
 }
@@ -30,5 +39,19 @@ html, body {
 }
 
 #appFooter {
-    height: 46px;
+    
+    background: linear-gradient(to top, #a849a3 0%,#c85ec7 53%,#e570e7 100%);
+    height: 60px;
+    padding: 4px;
+    
+    .btn {
+        outline: none;
+    }
+    
+    .btn:not(:first-child) {
+        margin {
+            right: 4px;
+        }
+    }
+    
 }

@@ -29,9 +29,10 @@
         <icon density="mdpi" src="resources/android/mdpi.png"/>
         <icon density="hdpi" src="resources/android/hdpi.png"/>
         <icon density="xhdpi" src="resources/android/xhdpi.png"/>
+        <splash src="resources/android/res-port-hdpi/screen.png" density="port-hdpi"/>
+        <splash src="resources/android/res-port-ldpi/screen.png" density="port-ldpi"/>
+        <splash src="resources/android/res-port-mdpi/screen.png" density="port-mdpi"/>
+        <splash src="resources/android/res-port-xhdpi/screen.png" density="port-xhdpi"/>
     </platform>
-    <feature name="File">
-        <param name="android-package" value="org.apache.cordova.FileUtils" />
-    </feature>
     <preference name="AndroidExtraFilesystems" value="documents" />
 </widget>
