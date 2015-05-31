@@ -558,6 +558,8 @@ require([
         },
         filesystemSuccess: function(filesystem) {
             
+            utilities.log(filesystem.name);
+            
             this.filesystem = filesystem;
             
         },
