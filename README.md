@@ -21,8 +21,13 @@ bautify me photo app (cordova prototype)
 * DONE: add stickers to an image
 * DONE: show message (green / red) after each action
 * DONE: create the images needed by the splashscreen plugin
-* share photo on social networks
-* load image from library to edit it
+* button to share a photo on social networks
+* load image from local device library to edit it
+* use the google drive API to backup images on drive
+* set the size of the canvas to the size of the image and change the canvas size using css, or the image will be small when it gets saved
+* the stickers functionality needs some improvents, would be nice to let the user choose a sticker from a gallery and then let him position and resize it manually
+* changing the filter should not reset the stickers
+* add more funny filters and / or let the user create own filters
 
 ## RESOURCES
 
