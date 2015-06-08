@@ -29,100 +29,106 @@ bautify me photo app (cordova prototype)
 * changing the filter should not reset the stickers
 * add more funny filters and / or let the user create own filters
 
+## PLUGINS USED BY THE APP
+* cordova-plugin-splashscreen
+* cordova-plugin-whitelist
+* cordova-plugin-file
+* cordova-plugin-camera
+
 ## RESOURCES
 
-phonegap configuration file documentation
+phonegap configuration file documentation: 
 http://docs.phonegap.com/en/edge/config_ref_index.md.html
 
-camera plugin options
+camera plugin options: 
 http://docs.phonegap.com/en/edge/cordova_camera_camera.md.html
 
-splashscreen plugin documentation
+splashscreen plugin documentation: 
 http://docs.phonegap.com/en/edge/cordova_splashscreen_splashscreen.md.html
 
-application icon documentation
+application icon documentation: 
 http://docs.phonegap.com/en/edge/config_ref_images.md.html
 
 ## project setup
 
-install io.js or node.js
+install io.js or node.js: 
 https://iojs.org
 
-install grunt and grunt cli globally
+install grunt and grunt cli globally: 
 npm install grunt -g
 npm install grunt-cli -g
 
-install ruby
+install ruby: 
 on windows get the windows installer http://rubyinstaller.org/
 
-install sass
+install sass: 
 gem install sass
 
-install git
+install git: 
 for example git for windows https://msysgit.github.io/
 
-install java jdk 1.7.x
+install java jdk 1.7.x: 
 http://www.oracle.com/technetwork/java/javase/downloads/index.html
 
-for windows: adndroid sdk requires java, so ensure you have a JAVA_HOME environment variable set
+for windows: adndroid sdk requires java, so ensure you have a JAVA_HOME environment variable set 
 JAVA_HOME should be something like C:\Program Files\Java\jdk1.7.0_79
 
-install stand-alone SDK tools
+install stand-alone SDK tools: 
 https://developer.android.com/sdk/installing/index.html
 
-install cordova
+install cordova: 
 npm install cordova -g
 
-checkout the project
+checkout the project: 
 https://github.com/chrisweb/cordova_prototype
 
-open your console and go into the root directory of the project where the Gruntfile.js resides and install the dependencies
+open your console and go into the root directory of the project where the Gruntfile.js resides and install the dependencies: 
 npm install
 
-if you IDE requires the path of the android sdk set it to something similar to this, this example is for windows
+if you IDE requires the path of the android sdk set it to something similar to this, this example is for windows: 
 C:\Users\USER_NAME\AppData\Local\Android\android-sdk\SDK Manager.exe
 
-if you are on windows and want to debug an android nexus device then you will need to install the google usb driver
+if you are on windows and want to debug an android nexus device then you will need to install the google usb driver: 
 http://developer.android.com/sdk/win-usb.html
 
-in this project the android platform has already been added, to add another platform, open your console and go into the app directory, then type the following command
+in this project the android platform has already been added, to add another platform, open your console and go into the app directory, then type the following command: 
 cordova platform add PLATFORM_NAME
 
-to test the app for android you need to setup the emulator, go into the android SDK folder and launch the AVD manager, then create a virtual device and start it
+to test the app for android you need to setup the emulator, go into the android SDK folder and launch the AVD manager, then create a virtual device and start it: 
 http://developer.android.com/tools/help/avd-manager.html
 
-if you get this error message "SSL certificate problem: unable to get local issuer certificate" when building the app, when the plugins get retrieved then you probably use the following command to disable ssl checks in git
+if you get this error message "SSL certificate problem: unable to get local issuer certificate" when building the app, when the plugins get retrieved then you probably use the following command to disable ssl checks in git: 
 git config --global http.sslVerify false
-! this is not safe, but I didnt find better solution yet, you can enable ssl checks after the checkout using this command
+! this is not safe, but I didnt find better solution yet, you can enable ssl checks after the checkout using this command: 
 git config --global http.sslVerify true
 
-if on device ready the camera plugin is undefined, re-install the plugins
+if on device ready the camera plugin is undefined, re-install the plugins: 
 cordova plugin remove cordova-plugin-camera
 cordova plugin add cordova-plugin-camera
 
-if the app does not build correctly try to reinstall the platform and plugins
+if the app does not build correctly try to reinstall the platform and plugins: 
 cordova platform remove android 
 cordova platform add android 
 
-cordova plugin remove cordova-plugin-splashscreen
-cordova plugin remove cordova-plugin-whitelist
-cordova plugin remove cordova-plugin-file
-cordova plugin remove cordova-plugin-camera
-cordova plugin add cordova-plugin-splashscreen
-cordova plugin add cordova-plugin-whitelist
-cordova plugin add cordova-plugin-file
-cordova plugin add cordova-plugin-camera
+* cordova plugin remove cordova-plugin-splashscreen
+* cordova plugin remove cordova-plugin-whitelist
+* cordova plugin remove cordova-plugin-file
+* cordova plugin remove cordova-plugin-camera
+* cordova plugin add cordova-plugin-splashscreen
+* cordova plugin add cordova-plugin-whitelist
+* cordova plugin add cordova-plugin-file
+* cordova plugin add cordova-plugin-camera
 
-to test the app in the emulator use this command
+to test the app in the emulator use this command: 
 cordova emulate android
 
-deploay the app on a device for testing, execute this command
+deploay the app on a device for testing, execute this command: 
 cordova run android --device
 
-if you try to debug on two different computers but on the same device, you will get this error message while building "INSTALL_FAILED_UPDATE_INCOMPATIBLE"
+if you try to debug on two different computers but on the same device, you will get this error message while building "INSTALL_FAILED_UPDATE_INCOMPATIBLE" 
 on your device go to settings > apps and delete the app, then run the command again
 
-to use the remote debugging of chrome
+to use the remote debugging of chrome: 
 open chrome, go to more tools > inspect devices and there your device should show up, now click on inspect
 
 ## keywords
